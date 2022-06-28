@@ -9,7 +9,7 @@ public class OmaoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OmaoApplication.class, args);
-		
+
 	}
 
 }

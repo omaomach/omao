@@ -31,19 +31,19 @@ public class WebUser implements UserDetails {
     )
 
     private Long id;
-    private String name;
-    private String username;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
     private WebUserRole webUserRole;
-    private Boolean locked;
-    private Boolean enabled;
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
-    public WebUser(String name, String username, String email, String password, WebUserRole webUserRole, Boolean locked, Boolean enabled) {
-        this.name = name;
-        this.username = username;
+    public WebUser(String firstName, String lastName, String email, String password, WebUserRole webUserRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.webUserRole = webUserRole;
@@ -65,7 +65,16 @@ public class WebUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
+    }
+
+    public String getFirstName() {
+
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
