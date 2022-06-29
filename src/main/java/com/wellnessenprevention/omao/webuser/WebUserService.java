@@ -1,7 +1,7 @@
 package com.wellnessenprevention.omao.webuser;
 
-import com.wellnessenprevention.omao.registration.tocken.ConfirmationToken;
-import com.wellnessenprevention.omao.registration.tocken.ConfirmationTokenService;
+import com.wellnessenprevention.omao.registration.token.ConfirmationToken;
+import com.wellnessenprevention.omao.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +21,7 @@ public class WebUserService implements UserDetailsService {
     private final WebUserRepository webUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -61,6 +62,11 @@ public class WebUserService implements UserDetailsService {
         //TODO: Send email
 
         return token;
+    }
+
+    public int enableWebUser(String email) {
+
+        return webUserRepository.enableWebUser(email);
     }
 
 }
