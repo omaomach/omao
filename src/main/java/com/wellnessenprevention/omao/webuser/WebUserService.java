@@ -50,7 +50,7 @@ public class WebUserService implements UserDetailsService {
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
                 LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(10),
+                LocalDateTime.now().plusMinutes(15),
                 webUser
 
         );
