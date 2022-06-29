@@ -21,6 +21,7 @@ public class RegistrationService {
 
         return webUserService.signUpUser(
                 new WebUser(
+
                         registrationRequest.getFirstName(),
                         registrationRequest.getLastName(),
                         registrationRequest.getEmail(),

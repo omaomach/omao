@@ -1,11 +1,16 @@
 package com.wellnessenprevention.omao.webuser;
 
+import com.wellnessenprevention.omao.registration.tocken.ConfirmationToken;
+import com.wellnessenprevention.omao.registration.tocken.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 // How we find users once we try to log in
 @Service
@@ -15,6 +20,7 @@ public class WebUserService implements UserDetailsService {
     private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
     private final WebUserRepository webUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmationTokenService confirmationTokenService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -38,9 +44,23 @@ public class WebUserService implements UserDetailsService {
 
         webUserRepository.save(webUser);
 
+        String token = UUID.randomUUID().toString();
         // TODO: Send confirmation token
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(10),
+                webUser
 
-        return "";
+        );
+
+        confirmationTokenService.saveConfirmationToken(
+                confirmationToken
+        );
+
+        //TODO: Send email
+
+        return token;
     }
 
 }

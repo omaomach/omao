@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-
-public class ConfirmationTocken {
+@Entity
+public class ConfirmationToken {
 
     @Id
     @SequenceGenerator(
@@ -33,7 +33,6 @@ public class ConfirmationTocken {
     @Column(nullable = false)
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
-    private LocalDateTime confirmedAt;
 
     @ManyToOne // this is is because an application user can have many confirmation tokens
     @JoinColumn(
@@ -43,12 +42,11 @@ public class ConfirmationTocken {
     // We need to tie the token to a user
     private WebUser webUser;
 
-    public ConfirmationTocken(Long id, String token, LocalDateTime createdAt, LocalDateTime expiresAt, LocalDateTime confirmedAt, WebUser webUser) {
+    public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, WebUser webUser) {
         this.id = id;
         this.token = token;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
-        this.confirmedAt = confirmedAt;
         this.webUser = webUser;
     }
 }
