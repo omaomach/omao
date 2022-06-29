@@ -33,7 +33,7 @@ public class ConfirmationToken {
     @Column(nullable = false)
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
-    private LocalDateTime conformedAt;
+    private LocalDateTime confirmedAt;
 
     @ManyToOne // this is because an application user can have many confirmation tokens
     @JoinColumn(
