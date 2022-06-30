@@ -51,7 +51,4 @@ public class ConfirmationToken {
     }
 
 
-    public Object getConfirmedAt() {
-        return null;
-    }
 }

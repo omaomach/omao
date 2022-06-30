@@ -36,6 +36,8 @@ public class WebUserService implements UserDetailsService {
                 .isPresent();
 
         if (userExits) {
+            // TODO check if attributes are the same and 
+            //TODO if email is not confirmed send confirmation email
             throw new IllegalStateException("email already taken");
         }
 
